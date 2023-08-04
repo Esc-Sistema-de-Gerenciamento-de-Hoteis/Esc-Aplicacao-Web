@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +27,33 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+
+/***************************************************************************************/
+/*                                                                                     */
+/*                                                                                     */
+/*                               Auth with Google                                      */
+/*                                                                                     */
+/*                                                                                     */
+/***************************************************************************************/
+
+Route::get('/google_auth', function () {
+    return Socialite::driver('google')->redirect();
+});
+
+Route::get('/auth/callback', function () {
+    $GoogleUser = Socialite::driver('google')->user(); 
+    
+    $user = User::updateOrCreate([
+        'id' => $GoogleUser->id,
+    ], [
+        'name' => $GoogleUser->name,
+        'email' => $GoogleUser->email,
+        'sub' => $GoogleUser->user['sub'],
+        'profile_photo_path' => $GoogleUser->user['picture'],
+    ]);
+ 
+    Auth::login($user);
+ 
+    return redirect('/dashboard');
 });
