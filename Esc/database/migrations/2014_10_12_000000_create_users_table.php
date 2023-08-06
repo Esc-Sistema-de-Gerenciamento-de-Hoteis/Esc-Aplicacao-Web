@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->integer('status')->default(1);
             $table->string('password')->default('SEM_SENHA');
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->string('sub');
             $table->string('profile')->default('0');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

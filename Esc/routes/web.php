@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
+use App\Models\Log;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,17 +45,44 @@ Route::get('/google_auth', function () {
 
 Route::get('/auth/callback', function () {
     $GoogleUser = Socialite::driver('google')->user(); 
+
+    $selectUser = DB::table('users')->where('email', $GoogleUser->email)->get();
+
+    foreach ($selectUser as $selectUser) {
+        $status = $selectUser->status; // Access status property for each product
+    }
+
+
+    if( $user = User::where('email', $GoogleUser->email)->exists()){
+
+        if($status == 0){
+            $log = new Log($user->id,'Login','User blocked',"The user couldn't logged because is blocked");
+            return view('livewire/warning/userblocked',['message' => 'User blocked, please check with the admin!','route'=>'/login']);
+
+        }else{
+            
+            Auth::login($GoogleUser);
+
+            $log = new Log($user_selected->id,'Login','Logged in',"The user logged into the system by SSO");
+            return redirect('/dashboard');
+
+        }
+
+    }else{
+
+        //creating user ...
+        $user = User::updateOrCreate([
+            'name' => $GoogleUser->name,
+            'email' => $GoogleUser->email,
+            'sub' => $GoogleUser->user['sub']
+        ]);
+
+        //Authentication
+        Auth::login($user);
+
+        $log = new Log($user_selected->id,'Login','Logged in',"The user logged into the system by SSO");
+        return redirect('/dashboard');
+    } 
+
     
-    $user = User::updateOrCreate([
-        'id' => $GoogleUser->id,
-    ], [
-        'name' => $GoogleUser->name,
-        'email' => $GoogleUser->email,
-        'sub' => $GoogleUser->user['sub'],
-        'profile_photo_path' => $GoogleUser->user['picture'],
-    ]);
- 
-    Auth::login($user);
- 
-    return redirect('/dashboard');
 });
