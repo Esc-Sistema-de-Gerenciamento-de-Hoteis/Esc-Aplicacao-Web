@@ -39,15 +39,20 @@
                     </a>
                 @endif
 
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ url('/google_auth') }}"><br>
-                        {{ __('Google') }}
-                </a>
-
-
                 <x-button class="ml-4">
                     {{ __('Log in') }}
                 </x-button>
+
             </div>
         </form>
+
+        </div>
+        <div class="flex items-center justify-end mt-1">
+            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ url('/google_auth') }}"><br>
+                {{ __('Logar com o Google') }}
+            </a>
+        </div>
     </x-authentication-card>
+
+
 </x-guest-layout>
