@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Livewire\Administration\Index;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Grupo de rotas autenticadas
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -30,7 +32,12 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-});
+
+    Route::get('/admintration', Index::class)->name('administration');
+
+
+    
+});//Termina a rota autenticada
 
 /***************************************************************************************/
 /*                                                                                     */
@@ -39,7 +46,7 @@ Route::middleware([
 /*                                                                                     */
 /*                                                                                     */
 /***************************************************************************************/
-
+#region Auth with Google
 Route::get('/google_auth', function () {
     return Socialite::driver('google')->redirect();
 });
@@ -90,3 +97,6 @@ Route::get('/auth/callback', function () {
 
     
 });
+#endregion
+
+
