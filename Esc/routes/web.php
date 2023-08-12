@@ -7,6 +7,7 @@ use App\Models\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Livewire\Administration\Index;
+use App\Http\Livewire\Administration\User\Create;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +34,24 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/admintration', Index::class)->name('administration');
+/***************************************************************************************/
+/*                                                                                     */
+/*                                                                                     */
+/*                               ADMINISTRATION                                        */
+/*                                                                                     */
+/*                                                                                     */
+/***************************************************************************************/
+
+
+    // Administration's screen
+    Route::get('/administration', Index::class)->name('administration');
+
+    //============================================== USERS =============================
+
+    Route::get('/administration/user/create', Create::class)->name('create_user');
+
+    Route::post('/administration/user/create', Create::class)->name('create_user');
+
 
 
     
@@ -55,26 +73,20 @@ Route::get('/auth/callback', function () {
     $GoogleUser = Socialite::driver('google')->user(); 
 
     $user = User::where('email', $GoogleUser->email)->first();
-    //dd($user->status);
-    
-    /*
-    foreach ($user as $user) {
-        $status = $user->status; // Access status property for each product
-    }
-    */
-
 
     if($user){
 
         if($user->status == 0){
             
-            $log = new Log($user->id,'Login','User blocked',"The user couldn't logged because is blocked");
+            $log = new Log();
+            $log->setLog($user->id,'Login','User blocked',"The user couldn't logged because is blocked");
             return view('livewire/warning/userblocked',['message' => 'User blocked, please check with the admin!','route'=>'/login']);
 
         }else{
             Auth::login($user);
 
-            $log = new Log($user->id,'Login','Logged in',"The user logged into the system by SSO");
+            $log = new Log();
+            $log->setLog($user->id,'Login','Logged in',"The user logged into the system by SSO");
             return redirect('/dashboard');
 
         }
@@ -91,10 +103,10 @@ Route::get('/auth/callback', function () {
         //Authentication
         Auth::login($user);
 
-        $log = new Log($user->id,'Login','Logged in',"The user logged into the system by SSO");
+        $log = new Log();
+        $log->setLog($user->id,'Login','Logged in',"The user logged into the system by SSO");
         return redirect('/dashboard');
     } 
-
     
 });
 #endregion

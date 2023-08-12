@@ -12,17 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         //
-
-        Schema::create('tb_logs', function (Blueprint $table) {
+        Schema::create('tb_company', function(Blueprint $table){
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->string('screen');
-            $table->string('description');
-            $table->text('observation');
-            $table->timestamps();
+            $table->string('branch');
+            $table->string('location');
+            $table->string('main_picture_3');
+
         });
-        
     }
 
     /**
@@ -31,7 +27,5 @@ return new class extends Migration
     public function down(): void
     {
         //
-        Schema::dropIfExists('tb_logs');
-
     }
 };

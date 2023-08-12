@@ -13,10 +13,11 @@ return new class extends Migration
     {
 
         Schema::create('tb_profile', function (Blueprint $table) {
-            $table->string('id')->primary();
+            $table->id();
             $table->string('name');
             $table->string('description');
-            $table->integer('createdBy');
+            $table->integer('status')->default(1);
+            $table->integer('created_by');
             $table->timestamps();
         });
     }
