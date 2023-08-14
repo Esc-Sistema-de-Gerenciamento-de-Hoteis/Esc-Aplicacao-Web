@@ -16,7 +16,8 @@ return new class extends Migration
             $table->id();
             $table->string('branch');
             $table->string('location');
-            $table->string('main_picture_3');
+            $table->integer('status')->default(1);
+            $table->timestamps();
 
         });
     }

@@ -12,13 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         //
-        Schema::create('tb_permission', function(Blueprint $table){
-            $table->id();
-            $table->string('name')->unique();
-            $table->string('description');
-            $table->integer('assigned_by')->references('id')->on('users');
-            $table->timestamps();
-        });
     }
 
     /**
@@ -27,6 +20,5 @@ return new class extends Migration
     public function down(): void
     {
         //
-        Schema::dropIfExists('tb_permission');
     }
 };

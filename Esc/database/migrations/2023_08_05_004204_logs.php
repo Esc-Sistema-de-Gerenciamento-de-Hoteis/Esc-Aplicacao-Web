@@ -15,8 +15,8 @@ return new class extends Migration
 
         Schema::create('tb_logs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('user_id')->references('id')->on('users');
+           // $table->foreign('user_id')->references('id')->on('users');
             $table->string('screen');
             $table->string('description');
             $table->text('observation');
