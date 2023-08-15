@@ -12,14 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         //
-        Schema::create('tb_company', function(Blueprint $table){
-            $table->id();
-            $table->string('branch');
-            $table->string('location');
-            $table->integer('status')->default(1);
-            $table->timestamps();
-
-        });
     }
 
     /**
@@ -28,6 +20,5 @@ return new class extends Migration
     public function down(): void
     {
         //
-        Schema::dropIfExists('tb_company');
     }
 };

@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         //
-        Schema::create('tb_client', function(Blueprint $table){
+        Schema::create('tb_escorts', function(Blueprint $table){
             $table->id();
+            $table->integer('escort_id')->references('id')->on('tb_client');
             $table->string('name');
             $table->string('last_name');
             $table->string('cpf');
@@ -39,7 +40,6 @@ return new class extends Migration
     public function down(): void
     {
         //
-        Schema::dropIfExists('tb_client');
-
+        Schema::dropIfExists('tb_escorts');
     }
 };

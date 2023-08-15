@@ -12,11 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         //
-        Schema::create('tb_assigned_permission', function(Blueprint $table){
+        Schema::create('tb_room', function(Blueprint $table){
             $table->id();
-            $table->integer('profile_id')->references('id')->on('tb_profile');
-            $table->string('permission_id')->references('id')->on('tb_permission');
-            $table->integer('assigned_by')->references('id')->on('users');
+            $table->integer('escort_id')->references('id')->on('tb_client');
+            $table->string('price_per_day');
+            $table->string('room_number');
+            $table->string('floor');
+            $table->string('status')->default(1);
+            $table->foreignIdFor(\App\Models\User::class, 'created_by');
             $table->timestamps();
         });
     }
@@ -27,6 +30,5 @@ return new class extends Migration
     public function down(): void
     {
         //
-        Schema::dropIfExists('tb_assigned_permission');
     }
 };
