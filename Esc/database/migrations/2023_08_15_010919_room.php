@@ -11,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-
-        Schema::create('tb_profile', function (Blueprint $table) {
+        //
+        Schema::create('tb_room', function(Blueprint $table){
             $table->id();
-            $table->string('name');
-            $table->string('description');
+            $table->integer('escort_id')->references('id')->on('tb_client');
+            $table->string('price_per_day');
+            $table->string('room_number');
+            $table->string('floor');
             $table->integer('status')->default(1);
-            $table->integer('created_by')->references('id')->on('users');
+            $table->string('status_reservation')->default('OPEN');
+            $table->foreignIdFor(\App\Models\User::class, 'created_by');
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ return new class extends Migration
     public function down(): void
     {
         //
-        Schema::dropIfExists('tb_profile');
+        Schema::dropIfExists('tb_room');
     }
 };

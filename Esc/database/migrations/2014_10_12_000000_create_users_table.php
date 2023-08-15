@@ -19,10 +19,11 @@ return new class extends Migration
             $table->integer('status')->default(1);
             $table->string('password')->default('SEM_SENHA');
             $table->rememberToken();
-            $table->foreignId('current_team_id')->nullable();
-            $table->string('profile_photo_path', 2048)->nullable();
             $table->string('sub')->default('0');
-            $table->string('profile')->default('0');
+            $table->integer('profile')->default('0');
+            $table->integer('edited_by')->references('id')->on('users')->default(001);
+            $table->string('picture')->nullable();
+            $table->integer('branch')->nullable()->references('id')->on('tb_company');;
             $table->timestamps();
             $table->softDeletes();
         });
