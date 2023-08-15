@@ -12,6 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         //
+        Schema::create('tb_room_service_products', function(Blueprint $table){
+            $table->id();
+            $table->string('product_name')
+            $table->string('price');
+            $table->foreignIdFor(\App\Models\User::class, 'created_by');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -20,5 +27,6 @@ return new class extends Migration
     public function down(): void
     {
         //
+        Schema::dropIfExists('tb_room_service_products');
     }
 };

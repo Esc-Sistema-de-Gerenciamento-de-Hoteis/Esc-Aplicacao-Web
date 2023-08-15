@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('price_per_day');
             $table->string('room_number');
             $table->string('floor');
-            $table->string('status')->default(1);
+            $table->integer('status')->default(1);
+            $table->string('status_reservation')->default('OPEN');
             $table->foreignIdFor(\App\Models\User::class, 'created_by');
             $table->timestamps();
         });
@@ -30,5 +31,6 @@ return new class extends Migration
     public function down(): void
     {
         //
+        Schema::dropIfExists('tb_room');
     }
 };

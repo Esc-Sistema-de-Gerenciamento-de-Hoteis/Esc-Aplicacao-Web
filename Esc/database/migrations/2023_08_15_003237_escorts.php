@@ -18,11 +18,11 @@ return new class extends Migration
             $table->string('name');
             $table->string('last_name');
             $table->string('cpf');
-            $table->string('birthday');
-            $table->string('sex');
-            $table->string('email');
-            $table->string('contact');
-            $table->string('emergency_contact');
+            $table->string('birthday')->nullable();
+            $table->string('sex')->nullable();
+            $table->string('email')->unique();
+            $table->string('contact')->nullable();
+            $table->string('emergency_contact')->nullable();
             $table->string('cep');
             $table->string('address');
             $table->string('neighborhood');
