@@ -15,7 +15,9 @@ return new class extends Migration
         Schema::create('tb_reservation', function(Blueprint $table){
             $table->id();
             $table->date('date');
-            $table->integer('client_id');
+            $table->dateTime('check_in');
+            $table->dateTime('check_out');
+            $table->integer('client_id')->references('id')->on('tb_client');
             $table->string('status')->default('PENDING');
             $table->integer('romm_id')->references('id')->on('tb_room');
             $table->integer('company_id')->references('id')->on('tb_company');

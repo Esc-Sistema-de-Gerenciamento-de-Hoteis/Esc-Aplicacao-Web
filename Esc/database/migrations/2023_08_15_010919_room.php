@@ -14,9 +14,10 @@ return new class extends Migration
         //
         Schema::create('tb_room', function(Blueprint $table){
             $table->id();
-            $table->integer('escort_id')->references('id')->on('tb_client');
-            $table->string('price_per_day');
             $table->string('room_number');
+            $table->string('description');
+            $table->string('price_per_day');
+            $table->integer('brach_id')->references('id')->on('tb_company');
             $table->string('floor');
             $table->integer('status')->default(1);
             $table->string('status_reservation')->default('OPEN');

@@ -15,7 +15,16 @@ return new class extends Migration
         Schema::create('tb_company', function(Blueprint $table){
             $table->id();
             $table->string('branch');
-            $table->string('location');
+            $table->string('description')->nullable();
+            $table->string('comfort')->nullable();
+            $table->integer('rated')->nullable();
+            $table->string('street');
+            $table->string('neighborhood');
+            $table->string('city');
+            $table->string('state');
+            $table->string('cep');
+            $table->string('email')->nullable();
+            $table->string('contact')->nullable();
             $table->integer('status')->default(1);
             $table->timestamps();
 
