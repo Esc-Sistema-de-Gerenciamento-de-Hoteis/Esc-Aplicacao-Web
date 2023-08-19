@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         //
-        Schema::create('tb_gallery', function(Blueprint $table){
+        Schema::create('tb_promotional_code', function(Blueprint $table){
             $table->id();
             $table->string('code');
             $table->string('description');
@@ -30,5 +30,7 @@ return new class extends Migration
     public function down(): void
     {
         //
+        Schema::dropIfExists('tb_promotional_code');
+
     }
 };
