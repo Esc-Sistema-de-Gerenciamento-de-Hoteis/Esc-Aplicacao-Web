@@ -16,7 +16,6 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('description')->nullable();
-            $table->integer('assigned_by')->references('id')->on('users');
             $table->timestamps();
         });
     }

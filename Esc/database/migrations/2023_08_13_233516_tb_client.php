@@ -16,14 +16,14 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('last_name');
-            $table->string('cpf');
+            $table->string('cpf')->unique();
             $table->string('birthday')->nullable();
             $table->string('sex')->nullable();
             $table->string('email')->unique();
             $table->string('contact')->nullable();
             $table->string('emergency_contact')->nullable();
             $table->string('cep');
-            $table->string('address');
+            $table->string('street');
             $table->string('neighborhood');
             $table->string('city');
             $table->string('state');

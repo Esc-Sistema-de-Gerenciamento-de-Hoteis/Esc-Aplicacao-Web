@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         //
-        Schema::create('tb_room_service', function(Blueprint $table){
+        Schema::create('tb_gallery', function(Blueprint $table){
             $table->id();
-            $table->date('date');
-            $table->integer('product_id')->references('id')->on('tb_room_service_products');
-            $table->integer('room_id')->references('id')->on('tb_room');
-            $table->string('status')->default("OPEN");
+            $table->integer('branch_id')->references('id')->on('tb_company');
+            $table->integer('room_id')->references('id')->on('tb_room')->nullable();
+            $table->string('name');
+            $table->string('link');
             $table->foreignIdFor(\App\Models\User::class, 'created_by');
             $table->timestamps();
         });
@@ -29,6 +29,7 @@ return new class extends Migration
     public function down(): void
     {
         //
-        Schema::dropIfExists('tb_room_service');
+        Schema::dropIfExists('tb_gallery');
+
     }
 };
