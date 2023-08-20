@@ -182,8 +182,9 @@
         </ul> {{-- Fim do menu--}}
         <select class="form-select form-select-lg mb-1" style="height: 50px; width: 200px;" aria-label="Default select example">
           <option selected></option>
-          @foreach()
-          <option value="{{}}">One</option>
+          @foreach($CompanySelect as $CompanySelect)
+          <option value="{{$CompanySelect->id}}">{{$CompanySelect->city}} - {{$CompanySelect->state}} </option>
+          @endforeach
         </select>
       </div>
     </div>

@@ -28,14 +28,14 @@ Route::get('/', function () {
 
     $CompanySelect = DB::table('tb_company')
     ->where('status','=', 1)
-    ->select('branch','id')
+    ->select('branch','id','city','state')
     ->distinct()
     ->get();
 
     //$GallerySelect = DB::table
 
 
-    return view('welcome');
+    return view('welcome',['CompanySelect' => $CompanySelect]);
 
     }
 });
