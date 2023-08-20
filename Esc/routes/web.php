@@ -21,7 +21,23 @@ use App\Http\Livewire\Administration\User\Create;
 */
 
 Route::get('/', function () {
+    if(Auth::user()){
+    return view('dashboard');
+
+    }else{
+
+    $CompanySelect = DB::table('tb_company')
+    ->where('status','=', 1)
+    ->select('branch','id')
+    ->distinct()
+    ->get();
+
+    //$GallerySelect = DB::table
+
+
     return view('welcome');
+
+    }
 });
 
 //Grupo de rotas autenticadas

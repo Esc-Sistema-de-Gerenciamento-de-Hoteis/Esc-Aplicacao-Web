@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('tb_company', function(Blueprint $table){
             $table->id();
             $table->string('branch');
+            $table->string('abbreviation');
             $table->string('description')->nullable();
             $table->string('comfort')->nullable();
             $table->integer('rated')->nullable();

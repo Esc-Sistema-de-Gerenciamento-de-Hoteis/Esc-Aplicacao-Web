@@ -17,21 +17,18 @@ class PermissionSeeder extends Seeder
         Permission::create([
             'name' => 'administration',
             'description' => "This function allows the user to consult the administrations screen",
-            'assigned_by' => 1
         ]);
 
         //2
         Permission::create([
             'name' => "admin_user_create_get",
             'description' => "This function allows the user to consult the user registers screen",
-            'assigned_by' => 1
         ]);
 
         //3
         Permission::create([
             'name' => "admin_user_create_post",
             'description' => "This function allows the user to create another user",
-            'assigned_by' => 1
         ]);
     }
 }

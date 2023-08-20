@@ -1,5 +1,5 @@
  <!doctype html>
-  <head><script src="/js/welcome.js"></script>
+  <head><script src="{{asset('js/welcome.js')}}"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,9 +10,9 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
-<link href="/css/welcome.css" rel="stylesheet">
+<link href="{{ asset('css/welcome.css')}}" rel="stylesheet">
     <!-- Favicons -->
-<link rel="manifest" href="/json/welcome.json">
+<link rel="manifest" href="{{asset('json/welcome.json')}}">
 <meta name="theme-color" content="#712cf9">
 
 
@@ -92,7 +92,7 @@
 
     
     <!-- Custom styles for this template -->
-    <link href="{{ asset('/css/welcome2.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/welcome2.css') }}" rel="stylesheet">
   </head>
   <body>
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -110,6 +110,8 @@
         <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
       </symbol>
     </svg>
+
+
 
     <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
       <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
@@ -161,25 +163,38 @@
           {{-- Inicio da barra de navegação --}}
 
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
+          <a class="nav-link active" aria-current="page" href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Funcionario</a>
         </li>
 
         <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="{{ url('/google_auth') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Google</a>
+          <a class="nav-link active" aria-current="page" href="{{ url('/google_auth') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Cliente</a>
+          </li>
+
+        <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{{ url('/google_auth') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Reserva</a>
         </li>
 
-
-
-
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ url('/google_auth') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Sobre</a>
+          </li>
 
 
         </ul> {{-- Fim do menu--}}
+        <select class="form-select form-select-lg mb-1" style="height: 50px; width: 200px;" aria-label="Default select example">
+          <option selected></option>
+          @foreach()
+          <option value="{{}}">One</option>
+        </select>
       </div>
     </div>
   </nav>
 </header>
 
+
+
 <main>
+
+
 
   <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
     <div class="carousel-indicators">
@@ -187,6 +202,10 @@
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
+
+
+
+    
     <div class="carousel-inner">
       <div class="carousel-item active">
         <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
@@ -229,7 +248,6 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-
 
   <!-- Marketing messaging and featurettes
   ================================================== -->
@@ -311,7 +329,7 @@
     <p>&copy; 2017–2023 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
   </footer>
 </main>
-<script src="{{ asset('/js/welcome2.js') }}" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<script src="{{ asset('js/welcome.js') }}" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
     </body>
 </html>
