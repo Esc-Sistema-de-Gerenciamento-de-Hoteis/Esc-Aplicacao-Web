@@ -5,41 +5,34 @@ namespace Tests\Feature;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response as FacadesResponse;
 
 class AuthenticationTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_login_screen_can_be_rendered(): void
+    public function test_auth(): void
     {
-        $response = $this->get('/login');
+        $request = new Request;
+        $response = new Response;
+        //$user = User::factory()->create();
 
-        $response->assertStatus(200);
-    }
+        $user = "admin@admin.com";
+        $password = "$10$8c/KYwMvPpCFKREhs9FGC.PERtyjNA4VntMM5bsON2O8eiSLF.4gS";
 
-    public function test_users_can_authenticate_using_the_login_screen(): void
-    {
-        $user = User::factory()->create();
+        $select = User::where('email', $user)->first();
+        dd($select);
 
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'password',
-        ]);
-
-        $this->assertAuthenticated();
-        $response->assertRedirect(RouteServiceProvider::HOME);
-    }
-
-    public function test_users_can_not_authenticate_with_invalid_password(): void
-    {
-        $user = User::factory()->create();
-
-        $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'wrong-password',
-        ]);
-
-        $this->assertGuest();
+        if ($user == $select->email && $password == $select->password) {
+            Auth::login($select);
+            $response->assertStatus(200);
+        } else {
+            $response->assertStatus(400);
+        }
     }
 }

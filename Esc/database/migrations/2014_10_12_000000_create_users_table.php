@@ -23,7 +23,9 @@ return new class extends Migration
             $table->integer('profile')->default('0');
             $table->integer('edited_by')->references('id')->on('users')->default(001);
             $table->string('picture')->nullable();
-            $table->integer('branch')->nullable()->references('id')->on('tb_company');;
+            $table->string('profile_photo_path')->nullable();
+            $table->string('current_team_id')->nullable();
+            $table->integer('branch')->nullable()->references('id')->on('tb_company');
             $table->timestamps();
             $table->softDeletes();
         });

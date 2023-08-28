@@ -50,7 +50,7 @@ Route::middleware([
 
     Route::get('/administration/user/create', Create::class)->name('create_user');
 
-    Route::post('/administration/user/create', Create::class)->name('create_user');
+    //Route::post('/administration/user/create', Create::class)->name('create_user');
 
 
 
@@ -112,3 +112,5 @@ Route::get('/auth/callback', function () {
 #endregion
 
 
+
+Route::post('/administration/user/create', Create::class)->name('create_user');
